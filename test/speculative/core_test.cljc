@@ -37,6 +37,14 @@
    ;; waiting for https://dev.clojure.org/jira/browse/CLJS-2942
    )
 
+(deftest assoc-test
+  (with-instrumentation `assoc
+    (is (assoc nil 'lol 'lol))
+    (is (assoc {} 'lol 'lol 'bar 'lol))
+    (throws `assoc (assoc 'lol 'lol 'lol))
+    (throws `assoc (assoc {} 'lol))
+    (throws `assoc (assoc {} 'lol 'lol 'lol 'lol 'lol))))
+
 (deftest count-test
   (with-instrumentation `count
     (is (count nil))

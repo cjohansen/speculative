@@ -29,6 +29,10 @@
                :intervening (s/* any?)
                :args (s/nilable seqable?)))
 
+(s/fdef clojure.core/assoc
+  :args (s/cat :map (s/nilable map?) :key any? :val any? :kvs (s/* (s/cat :ks any? :vs any?)))
+  :ret map?)
+
 (s/fdef clojure.core/count
   :args (s/cat :coll (s/or :counted counted? :seqable seqable?))
   :ret number?)
@@ -125,4 +129,5 @@
 
 (comment
   (stest/instrument)
+  (stest/unstrument)
   )
